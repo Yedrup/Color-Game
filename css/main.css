@@ -1,5 +1,50 @@
-body {background-color: rgb(95,96,94);}
-
-#canvas {
-	border: 1px solid black;
+body {
+	background-color: rgb(95,96,94);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
+
+.pannel {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 20rem;
+	height: 10rem;
+	background-color: rgba(255,255,255, 0.4);
+	border-radius: 2rem;
+}
+
+.answerDiv {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+}
+
+input {
+	max-width: 2.5rem;
+	color: rgb(200,200,200);
+}
+
+#red {
+	background-color: red;
+}
+#green {
+	background-color: green;
+}
+#blue {
+	background-color: blue;
+}
+
+
+#button {
+	height: 2rem;
+	text-align: center;
+	background-color: pink;
+	color: black;
+	margin-top: 2rem;
+	border-style: none;
+	border-radius: 1rem;
+}
+
