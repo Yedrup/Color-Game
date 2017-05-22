@@ -22,7 +22,7 @@ body {
 	width: 100%;
 }
 
-input {
+.colorValue {
 	max-width: 2.5rem;
 	color: rgb(200,200,200);
 }
@@ -37,14 +37,13 @@ input {
 	background-color: blue;
 }
 
-
 #button {
+	width: 4rem;
 	height: 2rem;
-	text-align: center;
 	background-color: pink;
 	color: black;
 	margin-top: 2rem;
 	border-style: none;
-	border-radius: 1rem;
+	border-radius: .5rem;
 }
 
