@@ -6,9 +6,7 @@ const button = document.querySelector('#button');
 const elemColorCreatedByPlayer = document.querySelector('.colorCreatedByPlayer');
 const elemColorToFind = document.querySelector('.colorToFindDiv');
 
-// const = document.querySelector();
 
-// blue.style.color = "red";
 
 button.addEventListener('click', () => {
     let redValue = Number(redInput.value);
