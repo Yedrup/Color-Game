@@ -1,0 +1,15 @@
+/////////////cibler/recupérer:
+//inputs récupérer info 
+//submit (function anonyme auto appelante)
+//cibler background color de la div pour modifier
+//cible background color de la div joueur
+
+////////Regles
+////input
+//verifier si bien 3 chiffres dans chaque input
+//pas au dessus de 255
+////jeu
+//afficher la couleur créee par le joueur
+//plus-moins que le nombre donné
+//count : 15 coups max
+//donner un ordre d'idée.

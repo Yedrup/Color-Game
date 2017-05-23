@@ -6,9 +6,16 @@
   <title>titre</title>
 </head>
 <body>
-	<p>Hello world!</p>
-	<div class="pannel">
-	 	<p>Guess the RGB of that color: </p>
+	<h2 class="title">Hello <span>(colored)</span> world!</h2>
+	<div class="presentation">
+		<p>This is my first project on GitHub, I searched for games when I was learning about colors to train myself having some colors in mind quickly.</p>
+		<p>So the idea of creating it myself sounded fun! here we go :)</p>
+	</div>
+	<div class="GamePannel">
+	 	<p class="messageToPlayer">Guess the RGB of that color: </p>
+	<div class="colorPannel">
+		<div class="colorToGuess"></div>
+	</div>	 	 	
 	<div class="answerDiv">		
 		<label for="red">R:</label>
 		<input class="colorValue" Id="red" type="text" name="answer">
@@ -16,9 +23,13 @@
 		<input Id="green" class="colorValue" type="text" name="answer">
 		<label for="blue">B: </label>
 		<input Id="blue" class="colorValue" type="text" name="answer">
-		</div>
 	</div>
-		<input id="button" type="submit" name="answer">
+	<div class="colorPannel">
+		<p class="messageToPlayer">Here the color you've created: </p>
+		<div class="colorTriedByUser"></div>
+	</div>	
+	</div>
+		<input id="button" type="submit" name="answer" value="TRY!">
 	<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
