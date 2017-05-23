@@ -1,15 +1,33 @@
-/////////////cibler/recupérer:
-//inputs récupérer info 
-//submit (function anonyme auto appelante)
-//cibler background color de la div pour modifier
-//cible background color de la div joueur
+cibler recupérer:
 
-////////Regles
-////input
-//verifier si bien 3 chiffres dans chaque input
-//pas au dessus de 255
-////jeu
-//afficher la couleur créee par le joueur
-//plus-moins que le nombre donné
-//count : 15 coups max
-//donner un ordre d'idée.
+inputs récupérer info 
+submit (function anonyme auto appelante)
+cibler background color de la div pour modifier
+cible background color de la div joueur
+
+Regles:
+
+input
+verifier si bien 3 chiffres dans chaque input
+pas au dessus de 255
+jeu
+afficher la couleur créee par le joueur
+plus-moins que le nombre donné
+count : 15 coups max
+donner un ordre d'idée.
+
+
+Goal :
+
+The goal of this game is to find the right rgb color of the one randomly created.
+You have <span> 15 </span> chances to find it
+
+
+
+
+++ : 
+
+difficultés:
+easy : 25 coups
+medium: 15 coups
+hard: 10 coups
