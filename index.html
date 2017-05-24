@@ -13,7 +13,6 @@
 		<p><span>RGB</span> stands for : Red, Green, Blue and looks like that in a css file: </p>
 		<code>p {color: rgb(255,255,255);
 		}</code>
-		<p></p>
 		<p>If you want to refresh the way rgb works click <a href="https://developer.mozilla.org/en-US/docs/Glossary/RGB" target="_blank">here!</a></p>
 	</div>
 	<button class="button" id="buttonStart">START!</button>
@@ -30,10 +29,16 @@
 		<label for="blue">B: </label>
 		<input Id="blue" maxlength="3" class="colorValue" type="text" name="answer">
 	</div>
-	<div class="colorPannel">
+	<div class="colorPannel colorPannelPlayer">
 		<p class="messageToPlayer">Here the color you've created: </p>
 		<div class="colorCreatedByPlayer"></div>
 	</div>	
+	<div class="messageToPlayerClue">
+		<p class="messageColorRedP"></p>
+		<p class="messageColorGreenP"></p>
+		<p class="messageColorBlueP"></p>
+		<p class="messageEndGame"></p>
+	</div>
 		<input id="buttonTry" class="button" type="submit" name="answer" value="TRY!">
 	</div>
 	<script type="text/javascript" src="js/script.js"></script>

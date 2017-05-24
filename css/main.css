@@ -33,6 +33,17 @@ body {
 	font-weight: bold;
 	color: rgb(50,50,50);
 }
+
+.messageSuccess {
+	color: green;
+	font-weight: bold;
+}
+
+.messageFail {
+	color: red;
+	font-weight: bold;
+}
+
 .rule p {
  	font-size: 1.25rem;
 }
@@ -61,7 +72,9 @@ body {
 	height: 4rem;
 	border: 1px solid black;
 }
-
+.colorPannelPlayer {
+	display: none;
+}
 .answerDiv {
 	display: flex;
 	justify-content: space-around;
