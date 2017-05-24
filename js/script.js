@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-
+    //targets
     const redInput = document.querySelector('#red');
     const greenInput = document.querySelector('#green');
     const blueInput = document.querySelector('#blue');
@@ -10,10 +10,19 @@
     const elemColorCreatedByPlayer = document.querySelector('.colorCreatedByPlayer');
     const elemColorToFind = document.querySelector('.colorToFindDiv');
     const elemGamePannel = document.querySelector('.GamePannel');
+    //values player
+    var redValue;
+    var greenValue;
+    var blueValue;
+    var playerRgb;
+     //values Random
     var greenRandom;
     var blueRandom;
     var randomRgb;
     var redRandom;
+    //Arays
+    var colorsPlayer = [];
+    var colorsRandom = [];
 
     function createRandomRgb() {
         redRandom = Math.floor(256 * Math.random());
@@ -23,20 +32,43 @@
         elemColorToFind.style.backgroundColor = randomRgb;
     }
 
+    function comparison(colorsRandom, colorsPlayer) {
+        colorsPlayer = [redValue, greenValue, blueValue];
+        colorsRandom = [redRandom, greenRandom, blueRandom];
+        var colorFound = 0;
+        var color = ['red','green','blue'];
+        for (var i = 0; i < colorsRandom.length; i++) {
+            if (colorsRandom[i] === colorsPlayer[i]) {
+                console.log("you've find the " + color[i]);
+                colorFound ++;
+                console.log(colorFound);
+                if (colorFound === colorsRandom.length) {
+                    console.log("GREAT GAME!");
+                    return;
+                }
+            } else if (colorsRandom[i] > colorsPlayer[i]) {
+                console.log('There is not enough of ' + color[i]); 
+            } else if(colorsRandom[i] < colorsPlayer[i]) {
+                console.log('There is too much of ' + color[i]); 
+            } else if (colorsPlayer[i] > 255) {
+                console.log("Remember, the maximum of each color is 255");
+            } 
+        }
+    }
+
     buttonStart.addEventListener('click', () => {
         elemGamePannel.style.display = "flex";
         createRandomRgb();
         console.log(randomRgb);
         buttonTry.addEventListener('click', () => {
-            var redValue = Number(redInput.value);
-            var greenValue = Number(greenInput.value);
-            var blueValue = Number(blueInput.value);
-            var playerRgb = 'rgb(' + redValue + ',' + greenValue + ',' + blueValue + ')';
+            //recuperer input
+            redValue = Number(redInput.value);
+            greenValue = Number(greenInput.value);
+            blueValue = Number(blueInput.value);
+            playerRgb = 'rgb(' + redValue + ',' + greenValue + ',' + blueValue + ')';
+            //
             elemColorCreatedByPlayer.style.backgroundColor = playerRgb;
-            if ((redValue || greenValue || blueValue) > 255) {
-                console.log("Remember, the maximum of each color is 255");
-                //count -1
-            }
+            comparison();
         //count ++
         });
     });
