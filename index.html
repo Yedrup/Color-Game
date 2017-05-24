@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/main.css">  
+  <link rel="stylesheet" href="css/normalize.css">  
   <title>Color Game - Find RGB</title>
 </head>
 <body>
@@ -15,6 +16,7 @@
 		<p></p>
 		<p>If you want to refresh the way rgb works click <a href="https://developer.mozilla.org/en-US/docs/Glossary/RGB" target="_blank">here!</a></p>
 	</div>
+	<button class="button" id="buttonStart">START!</button>
 	<div class="GamePannel">
 	 	<p class="messageToPlayer">Guess the RGB of that color: </p>
 	<div class="colorPannel">
@@ -22,18 +24,18 @@
 	</div>	 	 	
 	<div class="answerDiv">		
 		<label for="red">R:</label>
-		<input class="colorValue" Id="red" type="text" name="answer">
+		<input class="colorValue" Id="red" maxlength="3" type="text" name="answer">
 		<label for="green">G: </label>
-		<input Id="green" class="colorValue" type="text" name="answer">
+		<input Id="green" maxlength="3" class="colorValue" type="text" name="answer">
 		<label for="blue">B: </label>
-		<input Id="blue" class="colorValue" type="text" name="answer">
+		<input Id="blue" maxlength="3" class="colorValue" type="text" name="answer">
 	</div>
 	<div class="colorPannel">
 		<p class="messageToPlayer">Here the color you've created: </p>
 		<div class="colorCreatedByPlayer"></div>
 	</div>	
+		<input id="buttonTry" class="button" type="submit" name="answer" value="TRY!">
 	</div>
-		<input id="button" type="submit" name="answer" value="TRY!">
 	<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>

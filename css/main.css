@@ -5,18 +5,23 @@ body {
 	align-items: center;
 }
 
+.title {
+	margin-bottom: 0;
+	margin-top: .5rem;
+}
+
 .title span,
 .rule p {
 	color: rgb(244,200,200);
 }
 .rule {
- 	line-height: 1.25rem;
+ 	line-height: 1rem;
  	text-align: center;
 }
 .rule p:first-letter,
 .rule span {
     color: rgb(192,192,192);
-    font-size: 1.3rem;
+    font-size: 1.15rem;
     font-weight: bold;
 }
 .rule a {
@@ -28,14 +33,11 @@ body {
 	font-weight: bold;
 	color: rgb(50,50,50);
 }
-
-
-.presentation p {
+.rule p {
  	font-size: 1.25rem;
 }
-
 .GamePannel {
-	display: flex;
+	display: none;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -59,6 +61,7 @@ body {
 	height: 4rem;
 	border: 1px solid black;
 }
+
 .answerDiv {
 	display: flex;
 	justify-content: space-around;
@@ -86,13 +89,22 @@ body {
 	background-color: rgb(100,150,255);
 }
 
-#button {
-	width: 4rem;
-	height: 2rem;
-	background-color: rgb(244,200,200);
-	color: black;
-	margin-top: 2rem;
-	border-style: none;
-	border-radius: .5rem;
+#buttonStart {
+	background-color: rgb(175, 175, 188);
+	width: 5rem;
+	height: 3rem;
+	margin-bottom: 2rem;
 }
 
+#buttonTry {
+	width: 4rem;
+	height: 2.5rem;
+	background-color: rgb(244,200,200);
+	margin-top: 1rem;
+}
+
+.button {
+	color: black;
+	border: none;
+	border-radius: .5rem;
+}
