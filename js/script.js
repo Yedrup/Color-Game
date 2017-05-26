@@ -41,7 +41,6 @@
     }
     function addMessageToPlayer() {
             colorsMessages[i].innerHTML = message;
-
     }
     function comparison(colorsRandom, colorsPlayer) {
         message = "";
@@ -53,6 +52,7 @@
         for (i = 0; i < colorsRandom.length; i++) {
             if (colorsRandom[i] === colorsPlayer[i]) {
                 message = "You've find the " + color[i];
+                colorsMessages[i].classList.toggle('messageFail');
                 colorsMessages[i].className += " messageSuccess";        
                 colorFound ++;
             } else if (colorsRandom[i] > colorsPlayer[i]) {
@@ -72,9 +72,7 @@
                     return;
                 }
                 addMessageToPlayer(); 
-
                 console.log(colorsMessages[i]);
-
         }
     }
 
