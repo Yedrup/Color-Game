@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="css/main.css">  
-  <link rel="stylesheet" href="css/normalize.css">  
-  <title>Color Game - Find RGB</title>
-</head>
-<body>
-	<h2 class="title">Hello <span>(colored)</span> world!</h2>
-	<div class="rule">
-		<p>The goal is simple: you have to find the good RGB color.</p>
-		<p><span>RGB</span> stands for : Red, Green, Blue and looks like that in a css file: </p>
-		<code>p {color: rgb(255,255,255);
-		}</code>
-		<p>If you want to refresh the way rgb works click <a href="https://developer.mozilla.org/en-US/docs/Glossary/RGB" target="_blank">here!</a></p>
-	</div>
-	<button class="button" id="buttonStart">START!</button>
-	<div class="GamePannel">
-	 	<p class="messageToPlayer">Guess the RGB of that color: </p>
-	<div class="colorPannel">
-		<div class="colorToFindDiv"></div>
-	</div>	 	 	
-	<div class="answerDiv">		
-		<label for="red">R:</label>
-		<input class="colorValue" Id="red" maxlength="3" type="text" name="answer">
-		<label for="green">G: </label>
-		<input Id="green" maxlength="3" class="colorValue" type="text" name="answer">
-		<label for="blue">B: </label>
-		<input Id="blue" maxlength="3" class="colorValue" type="text" name="answer">
-	</div>
-	<div class="colorPannel colorPannelPlayer">
-		<p class="messageToPlayer">Here the color you've created: </p>
-		<div class="colorCreatedByPlayer"></div>
-	</div>	
-	<div class="messageToPlayerClue">
-		<p class="messageColorRedP"></p>
-		<p class="messageColorGreenP"></p>
-		<p class="messageColorBlueP"></p>
-		<p class="messageEndGame"></p>
-	</div>
-		<input id="buttonTry" class="button" type="submit" name="answer" value="TRY!">
-	</div>
-	<script type="text/javascript" src="js/script.js"></script>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <title>Color Game - Find RGB</title>
+    </head>
+    <body>
+        <h2 class="title">Hello <span>(colored)</span> world!</h2>
+        <div class="rules">
+            <p>The goal is simple: you have to find the good RGB color.</p>
+            <p><span>RGB</span> stands for : Red, Green, Blue and looks like that in a css file: </p>
+            <code>p {color: rgb(255,255,255);
+            }</code>
+            <p>If you want to refresh the way rgb works click <a href="https://developer.mozilla.org/en-US/docs/Glossary/RGB" target="_blank">here!</a></p>
+        </div>
+        <button class="button" id="buttonStart">START!</button>
+        <div class="GamePannel">
+            <p class="messageToPlayer">Guess the RGB of that color: </p>
+            <div class="colorPannel">
+                <div class="colorToFindDiv"></div>
+            </div>
+            <div class="answerDiv">
+                <label for="red">R:</label>
+                <input class="colorValue" Id="red" maxlength="3" type="text" name="answer">
+                <label for="green">G: </label>
+                <input Id="green" maxlength="3" class="colorValue" type="text" name="answer">
+                <label for="blue">B: </label>
+                <input Id="blue" maxlength="3" class="colorValue" type="text" name="answer">
+            </div>
+            <div class="colorPannel colorPannelPlayer">
+                <p class="messageToPlayer">Here the color you've created: </p>
+                <div class="colorCreatedByPlayer"></div>
+            </div>
+            <div class="messageToPlayerClue">
+                <p class="messageColor messageColorRed"></p>
+                <p class="messageColor messageColorGreen"></p>
+                <p class="messageColor messageColorBlue"></p>
+            </div>
+            <p class="messageOther"></p>
+            <button id="buttonTry" class="button">TRY!</button>
+        </div>
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
 </html>

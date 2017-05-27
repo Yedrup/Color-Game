@@ -11,21 +11,24 @@ body {
 }
 
 .title span,
-.rule p {
+.rules p {
 	color: rgb(244,200,200);
 }
-.rule {
+.rules p {
+ 	font-size: 1.25rem;
+}
+.rules {
  	line-height: 1rem;
  	text-align: center;
 }
-.rule p:first-letter,
-.rule span {
+.rules p:first-letter,
+.rules span {
     color: rgb(192,192,192);
     font-size: 1.15rem;
     font-weight: bold;
 }
-.rule a {
-	color: black;
+.rules a {
+	color: rgb(192,192,192);
 	font-weight: 700;
 }
 
@@ -34,19 +37,30 @@ body {
 	color: rgb(50,50,50);
 }
 
-.messageSuccess {
-	color: green;
+.messageColor {
 	font-weight: bold;
+}
+
+.messageSuccess {
+	color: rgb(90,136,74);
+}
+
+.messageSuccess:after {
+	content: " \2713";
 }
 
 .messageFail {
-	color: red;
-	font-weight: bold;
+	color: rgb(150,15,15);
+}
+.messageFail:after {
+	content: " \2717";
 }
 
-.rule p {
- 	font-size: 1.25rem;
+.messageOther {
+	font-size: 2rem;
+	color: green;
 }
+
 .GamePannel {
 	display: none;
 	flex-direction: column;
@@ -72,7 +86,8 @@ body {
 	height: 4rem;
 	border: 1px solid black;
 }
-.colorPannelPlayer {
+.colorPannelPlayer,
+.messageOther {
 	display: none;
 }
 .answerDiv {
@@ -83,7 +98,7 @@ body {
 
 .answerDiv label {
 	align-self: center;
-	margin-right: -2rem;
+	margin-right: -2.2rem;
 }
 
 .colorValue {
