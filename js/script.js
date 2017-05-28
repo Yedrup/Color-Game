@@ -6,6 +6,7 @@
     const redInput = document.querySelector('#red');
     const greenInput = document.querySelector('#green');
     const blueInput = document.querySelector('#blue');
+    const inputsColor = document.querySelector('.colorValue');
     const elemForm = document.querySelector('.answerDiv');
     const elemColorPannelPlayer = document.querySelector('.colorPannelPlayer');
     const elemMessagesColor = document.querySelector('.messageToPlayerClue');
@@ -55,7 +56,7 @@
         elemForm.reset();
         console.log("je passe par initialize");
         buttonTry.textContent = "TRY";
-    };
+    }
 
     function createRandomRgb () {
         redRandom = Math.floor(256 * Math.random());
@@ -81,6 +82,9 @@
                 colorsMessages[i].classList.remove('messageFail');
                 colorsMessages[i].className += " messageSuccess";
                 colorFound++;
+            } else if (colorsPlayer[i] == "") {
+               message = "at least one number :)"; 
+               colorsMessages[i].className += " messageFail";   
             } else if (colorsRandom[i] > colorsPlayer[i]) {
                 message = 'There is not enough of ' + color[i];
                 colorsMessages[i].className += " messageFail";
@@ -93,7 +97,7 @@
             } else if (isNaN(colorsPlayer[i])) {
                 message = "it's not a number :)";
                 colorsMessages[i].className += " messageFail";
-            }
+            } 
             addMessageToPlayer();
             if (colorFound === colorsRandom.length) {
                 elemOtherMessage.style.display = "flex";
@@ -109,6 +113,7 @@
         buttonStart.textContent = "RESTART GAME";
         createRandomRgb();
         console.log(randomRgb);
+        //function at try
         buttonTry.addEventListener('click', function() {
             buttonTry.textContent = "RETRY";
             elemColorPannelPlayer.style.display = "flex";
