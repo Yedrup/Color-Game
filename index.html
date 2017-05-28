@@ -16,19 +16,19 @@
             <p>If you want to refresh the way rgb works click <a href="https://developer.mozilla.org/en-US/docs/Glossary/RGB" target="_blank">here!</a></p>
         </div>
         <button class="button" id="buttonStart">START!</button>
-        <div class="GamePannel">
+        <div class="GamePannel hide">
             <p class="messageToPlayer">Guess the RGB of that color: </p>
             <div class="colorPannel">
                 <div class="colorToFindDiv"></div>
             </div>
-            <div class="answerDiv">
+            <form class="answerDiv">
                 <label for="red">R:</label>
                 <input class="colorValue" Id="red" maxlength="3" type="text" name="answer">
                 <label for="green">G: </label>
                 <input Id="green" maxlength="3" class="colorValue" type="text" name="answer">
                 <label for="blue">B: </label>
                 <input Id="blue" maxlength="3" class="colorValue" type="text" name="answer">
-            </div>
+            </form>
             <div class="colorPannel colorPannelPlayer">
                 <p class="messageToPlayer">Here the color you've created: </p>
                 <div class="colorCreatedByPlayer"></div>

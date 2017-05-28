@@ -6,6 +6,7 @@
     const redInput = document.querySelector('#red');
     const greenInput = document.querySelector('#green');
     const blueInput = document.querySelector('#blue');
+    const elemForm = document.querySelector('.answerDiv');
     const elemColorPannelPlayer = document.querySelector('.colorPannelPlayer');
     const elemMessagesColor = document.querySelector('.messageToPlayerClue');
     const elemMessageRed = document.querySelector('.messageColorRed');
@@ -23,34 +24,56 @@
     //values Random
     var greenRandom;
     var blueRandom;
-    var randomRgb;
     var redRandom;
+    var randomRgb;
     //Arays
     var colorsPlayer = [];
     var colorsRandom = [];
     var colorsMessages = [];
-    var i = 0;
     //message
     var message = "";
 
-    function createRandomRgb() {
+    //count
+    var colorFound;
+    var countOfTry;
+    var i;
+
+
+    function changeState (elem) {
+        elem.classList.remove("hide");
+        elem.classList.add("show");
+    }
+
+    function initialize () {
+        elemOtherMessage.style.display = "none";
+        elemColorPannelPlayer.style.display = "none";
+        elemMessagesColor.style.display = "none";
+        message = "";
+        elemGamePannel.insertBefore(elemMessagesColor, buttonTry);
+        elemColorCreatedByPlayer.style.backgroundColor = "transparent";
+        changeState(elemGamePannel);
+        elemForm.reset();
+        console.log("je passe par initialize");
+        buttonTry.textContent = "TRY";
+    };
+
+    function createRandomRgb () {
         redRandom = Math.floor(256 * Math.random());
         greenRandom = Math.floor(256 * Math.random());
         blueRandom = Math.floor(256 * Math.random());
-        randomRgb = 'rgb(' + redRandom + ',' + greenRandom + ',' + blueRandom + ')';
+        randomRgb = `rgb(${redRandom},${greenRandom},${blueRandom})`;
         elemColorToFind.style.backgroundColor = randomRgb;
     }
 
-    function addMessageToPlayer() {
+    function addMessageToPlayer () {
         colorsMessages[i].innerHTML = message;
     }
 
-    function comparison(colorsRandom, colorsPlayer) {
-        message = "";
+    function comparison (colorsRandom, colorsPlayer) {
+        colorFound = 0;
         colorsMessages = [elemMessageRed, elemMessageGreen, elemMessageBlue];
         colorsPlayer = [redValue, greenValue, blueValue];
         colorsRandom = [redRandom, greenRandom, blueRandom];
-        var colorFound = 0;
         var color = ['red', 'green', 'blue'];
         for (i = 0; i < colorsRandom.length; i++) {
             if (colorsRandom[i] === colorsPlayer[i]) {
@@ -61,42 +84,43 @@
             } else if (colorsRandom[i] > colorsPlayer[i]) {
                 message = 'There is not enough of ' + color[i];
                 colorsMessages[i].className += " messageFail";
-
-            } else if ((colorsRandom[i] < colorsPlayer[i]) & (colorsPlayer[i] < 255)) {
+            } else if ((colorsRandom[i] < colorsPlayer[i]) && (colorsPlayer[i] < 256)) {
                 message = 'There is too much of ' + color[i];
                 colorsMessages[i].className += " messageFail";
-
             } else if (colorsPlayer[i] > 255) {
                 message = "The maximum of each color is 255";
                 colorsMessages[i].className += " messageFail";
+            } else if (isNaN(colorsPlayer[i])) {
+                message = "it's not a number :)";
+                colorsMessages[i].className += " messageFail";
             }
             addMessageToPlayer();
-            }
             if (colorFound === colorsRandom.length) {
                 elemOtherMessage.style.display = "flex";
                 elemMessagesColor.remove();
-                elemOtherMessage.textContent = " GREAT GAME! ";
                 buttonTry.textContent = "GG!";
+                elemOtherMessage.textContent = " GREAT GAME! ";
                 return;
+            }
         }
     }
-
     buttonStart.addEventListener('click', function () {
-        elemGamePannel.style.display = "flex";
+        initialize();
         buttonStart.textContent = "RESTART GAME";
         createRandomRgb();
         console.log(randomRgb);
-        buttonTry.addEventListener('click', function () {
+        buttonTry.addEventListener('click', function() {
             buttonTry.textContent = "RETRY";
             elemColorPannelPlayer.style.display = "flex";
+            elemMessagesColor.style.display = "block";
+
             //recuperer input
             redValue = Number(redInput.value);
             greenValue = Number(greenInput.value);
             blueValue = Number(blueInput.value);
             playerRgb = `rgb(${redValue},${greenValue},${blueValue})`;
-            //
             elemColorCreatedByPlayer.style.backgroundColor = playerRgb;
             comparison();
         });
-    });
-}());
+    })
+})();
