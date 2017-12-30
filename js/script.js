@@ -82,7 +82,7 @@
                 colorsMessages[i].classList.remove('messageFail');
                 colorsMessages[i].className += " messageSuccess";
                 colorFound++;
-            } else if (colorsPlayer[i] == "") {
+            } else if (colorsPlayer[i] === '') {
                message = "at least one number :)"; 
                colorsMessages[i].className += " messageFail";   
             } else if (colorsRandom[i] > colorsPlayer[i]) {
