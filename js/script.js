@@ -1,7 +1,7 @@
 (function () {
     //targets
-    const elemGamePannel = document.querySelector('.GamePannel');
-    const elemColorToFind = document.querySelector('.colorToFindDiv');
+    const elemGamePannel = document.querySelector('.js-game-pannel');
+    const elemColorToFind = document.querySelector('.js-colorToFindDiv');
     const elemColorCreatedByPlayer = document.querySelector('.colorCreatedByPlayer');
     const redInput = document.querySelector('#red');
     const greenInput = document.querySelector('#green');
@@ -13,9 +13,9 @@
     const elemMessageRed = document.querySelector('.messageColorRed');
     const elemMessageGreen = document.querySelector('.messageColorGreen');
     const elemMessageBlue = document.querySelector('.messageColorBlue');
-    const elemOtherMessage = document.querySelector('.messageOther');
-    const buttonTry = document.querySelector('#buttonTry');
-    const buttonStart = document.querySelector('#buttonStart');
+    const elemOtherMessage = document.querySelector('.js-message-great-game');
+    const buttonTry = document.querySelector('.js-button-try');
+    const buttonStart = document.querySelector('.js-button-start');
 
     //values player
     var redValue;
@@ -40,12 +40,12 @@
     var i;
 
 
-    function changeState (elem) {
+    function changeState(elem) {
         elem.classList.remove("hide");
         elem.classList.add("show");
     }
 
-    function initialize () {
+    function initialize() {
         elemOtherMessage.style.display = "none";
         elemColorPannelPlayer.style.display = "none";
         elemMessagesColor.style.display = "none";
@@ -58,7 +58,7 @@
         buttonTry.textContent = "TRY";
     }
 
-    function createRandomRgb () {
+    function createRandomRgb() {
         redRandom = Math.floor(256 * Math.random());
         greenRandom = Math.floor(256 * Math.random());
         blueRandom = Math.floor(256 * Math.random());
@@ -66,11 +66,11 @@
         elemColorToFind.style.backgroundColor = randomRgb;
     }
 
-    function addMessageToPlayer () {
+    function addMessageToPlayer() {
         colorsMessages[i].innerHTML = message;
     }
 
-    function comparison (colorsRandom, colorsPlayer) {
+    function comparison(colorsRandom, colorsPlayer) {
         colorFound = 0;
         colorsMessages = [elemMessageRed, elemMessageGreen, elemMessageBlue];
         colorsPlayer = [redValue, greenValue, blueValue];
@@ -79,25 +79,25 @@
         for (i = 0; i < colorsRandom.length; i++) {
             if (colorsRandom[i] === colorsPlayer[i]) {
                 message = "You've find the " + color[i];
-                colorsMessages[i].classList.remove('messageFail');
-                colorsMessages[i].className += " messageSuccess";
+                colorsMessages[i].classList.remove('message--fail');
+                colorsMessages[i].className += " message--success";
                 colorFound++;
             } else if (colorsPlayer[i] === '') {
-               message = "at least one number :)"; 
-               colorsMessages[i].className += " messageFail";   
+                message = "at least one number :)";
+                colorsMessages[i].className += " message--fail";
             } else if (colorsRandom[i] > colorsPlayer[i]) {
                 message = 'There is not enough of ' + color[i];
-                colorsMessages[i].className += " messageFail";
+                colorsMessages[i].className += " message--fail";
             } else if ((colorsRandom[i] < colorsPlayer[i]) && (colorsPlayer[i] < 256)) {
                 message = 'There is too much of ' + color[i];
-                colorsMessages[i].className += " messageFail";
+                colorsMessages[i].className += " message--fail";
             } else if (colorsPlayer[i] > 255) {
                 message = "The maximum of each color is 255";
-                colorsMessages[i].className += " messageFail";
+                colorsMessages[i].className += " message--fail";
             } else if (isNaN(colorsPlayer[i])) {
                 message = "it's not a number :)";
-                colorsMessages[i].className += " messageFail";
-            } 
+                colorsMessages[i].className += " message--fail";
+            }
             addMessageToPlayer();
             if (colorFound === colorsRandom.length) {
                 elemOtherMessage.style.display = "flex";
@@ -114,11 +114,11 @@
         createRandomRgb();
         console.log(randomRgb);
         //function at try
-        buttonTry.addEventListener('click', function() {
+        buttonTry.addEventListener('click', function () {
             buttonTry.textContent = "RETRY";
             elemColorPannelPlayer.style.display = "flex";
             elemMessagesColor.style.display = "block";
-
+            
             //recuperer input
             redValue = Number(redInput.value);
             greenValue = Number(greenInput.value);
@@ -127,5 +127,16 @@
             elemColorCreatedByPlayer.style.backgroundColor = playerRgb;
             comparison();
         });
-    })
+        document.addEventListener('keydown', function (event) {
+            if (event.keyCode === 13) {
+                buttonTry.click();            
+                event.preventDefault();
+            }
+
+        });
+    });
+    
+
+
+
 })();

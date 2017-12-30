@@ -1,5 +1,5 @@
 body {
-	background-color: rgb(95,96,94);
+	background-color: rgb(31, 29, 27);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -7,54 +7,44 @@ body {
 
 .title {
 	margin-bottom: 0;
-	margin-top: .5rem;
+	margin-top: 2rem;
+}
+.rules__text {
+	 font-size: 1.25rem;
 }
 .title span,
-.rules p {
-	color: rgb(244,200,200);
-}
-.rules p {
- 	font-size: 1.25rem;
+.rules__text {
+	color: rgba(81, 159, 148, 0.789);
 }
 .rules {
  	line-height: 1rem;
  	text-align: center;
 }
-.rules p:first-letter,
-.rules span {
-    color: rgb(192,192,192);
-    font-size: 1.15rem;
-    font-weight: bold;
-}
-.rules a {
+
+.text--silver {
 	color: rgb(192,192,192);
-	font-weight: 700;
 }
-.messageToPlayer {
-	font-weight: bold;
-	color: rgb(50,50,50);
+
+
+.message--success {
+	color: rgb(220,236,220);
 }
-.messageColor {
-	font-weight: bold;
+.message--great-game {
+	color: rgb(220,236,220);
+	font-size: 2rem;
+	margin: .5rem 0;	
 }
-.messageSuccess {
-	color: rgb(90,136,74);
-}
-.messageSuccess:after {
+.message--success:after {
 	content: " \2713";
 }
 
-.messageFail {
+.message--fail {
 	color: rgb(150,15,15);
 }
-.messageFail:after {
+.message--fail:after {
 	content: " \2717";
 }
 
-.messageOther {
-	font-size: 2rem;
-	color: green;
-}
 
 .show {
 	display: flex;
@@ -62,13 +52,13 @@ body {
 .hide {
 	display: none;
 }
-.GamePannel {
+.game-pannel {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	width: 20rem;
 	height: auto;
-	background-color: rgba(255,255,255, 0.4);
+	background-color: rgba(81, 159, 148, 0.7);
 	border-radius: 2rem;
 }
 .colorPannel {
@@ -116,23 +106,25 @@ body {
 	background-color: rgb(100,150,255);
 }
 
-#buttonStart {
-	background-color: rgb(175, 175, 188);
-	width: 5rem;
-	height: 3rem;
+
+.button {
+	color: rgb(250, 250, 250);
+	border: none;
+	border-radius: .5rem;
+	padding: .75rem .5rem;
+	outline: none;
+}
+
+
+.button--start {
+	background-color: rgb(46, 79, 107);
 	margin-bottom: 2rem;
 }
 
-#buttonTry {
-	width: 4rem;
-	height: 2.5rem;
-	background-color: rgb(244,200,200);
+.button--try {
+
+	background-color: rgb(31, 29, 27);
 	margin-top: 1rem;
 	margin-bottom: 1rem;
 }
 
-.button {
-	color: black;
-	border: none;
-	border-radius: .5rem;
-}

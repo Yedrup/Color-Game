@@ -7,25 +7,25 @@
         <title>Color Game - Find RGB</title>
     </head>
     <body>
-        <h2 class="title">Hello <span>(colored)</span> world!</h2>
+        <h2 class="title text--silver">Hello <span>(colored)</span> world!</h2>
         <div class="rules">
-            <p>The goal is simple: you have to find the good RGB color.</p>
-            <p><span>RGB</span> stands for : Red, Green, Blue and looks like that in a css file: </p>
-            <code>p {color: rgb(255,255,255);
+            <p class="rules__text">The goal is simple: you have to find the good RGB color.</p>
+            <p class="rules__text"><span class="text--silver">RGB</span> stands for : Red, Green, Blue and looks like that in a css file: </p>
+            <code class="text--silver">p {color: rgb(255,255,255);
             }</code>
-            <p>If you want to refresh the way rgb works click <a href="https://developer.mozilla.org/en-US/docs/Glossary/RGB" target="_blank">here!</a></p>
+            <p class="rules__text">If you want to refresh the way rgb works click <a href="https://developer.mozilla.org/en-US/docs/Glossary/RGB" target="_blank" class="text--silver">here!</a></p>
         </div>
-        <button class="button" id="buttonStart">START!</button>
-        <div class="GamePannel hide">
-            <p class="messageToPlayer">Guess the RGB of that color: </p>
+        <button class="button button--start js-button-start">START!</button>
+        <div class="game-pannel hide js-game-pannel">
+            <p class="text--silver js-message-to-player">Guess the RGB of that color: </p>
             <div class="colorPannel">
-                <div class="colorToFindDiv"></div>
+                <div class="colorToFindDiv js-colorToFindDiv"></div>
             </div>
             <form class="answerDiv">
                 <label for="red">R:</label>
                 <input class="colorValue" Id="red" maxlength="3" type="text" name="answer">
                 <label for="green">G: </label>
-                <input Id="green" maxlength="3" class="colorValue" type="text" name="answer">
+                <input Id="green" maxlength="3" class=" green colorValue" type="text" name="answer">
                 <label for="blue">B: </label>
                 <input Id="blue" maxlength="3" class="colorValue" type="text" name="answer">
             </form>
@@ -38,8 +38,8 @@
                 <p class="messageColor messageColorGreen"></p>
                 <p class="messageColor messageColorBlue"></p>
             </div>
-            <p class="messageOther"></p>
-            <button id="buttonTry" class="button">TRY!</button>
+            <p class="message--great-game js-message-great-game"></p>
+            <button class="button button--try js-button-try">TRY!</button>
         </div>
         <script type="text/javascript" src="js/script.js"></script>
     </body>
