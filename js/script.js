@@ -1,21 +1,20 @@
 (function () {
     //targets
-    const elemGamePannel = document.querySelector('.js-game-pannel');
-    const elemColorToFind = document.querySelector('.js-colorToFindDiv');
-    const elemColorCreatedByPlayer = document.querySelector('.colorCreatedByPlayer');
-    const redInput = document.querySelector('#red');
-    const greenInput = document.querySelector('#green');
-    const blueInput = document.querySelector('#blue');
-    const inputsColor = document.querySelector('.colorValue');
-    const elemForm = document.querySelector('.answerDiv');
-    const elemColorPannelPlayer = document.querySelector('.colorPannelPlayer');
-    const elemMessagesColor = document.querySelector('.messageToPlayerClue');
-    const elemMessageRed = document.querySelector('.messageColorRed');
-    const elemMessageGreen = document.querySelector('.messageColorGreen');
-    const elemMessageBlue = document.querySelector('.messageColorBlue');
-    const elemOtherMessage = document.querySelector('.js-message-great-game');
-    const buttonTry = document.querySelector('.js-button-try');
-    const buttonStart = document.querySelector('.js-button-start');
+    const elemGamePannel = document.getElementsByClassName('js-game-pannel')[0];
+    const elemColorToFind = document.getElementsByClassName('js-random-color')[0];
+    const elemColorCreatedByPlayer = document.getElementsByClassName('js-player-color')[0];
+    const redInput = document.getElementById('js-input-red');
+    const greenInput = document.getElementById('js-input-green');
+    const blueInput = document.getElementById('js-input-blue');
+    const elemForm = document.getElementsByClassName('js-answers')[0];
+    const elemColorPannelPlayer = document.getElementsByClassName('js-color-panel-player')[0];
+    const elemMessagesColor = document.getElementsByClassName('js-messages-clue')[0];
+    const elemMessageRed = document.getElementsByClassName('js-message-red')[0];
+    const elemMessageGreen = document.getElementsByClassName('js-message-green')[0];
+    const elemMessageBlue = document.getElementsByClassName('js-message-blue')[0];
+    const elemOtherMessage = document.getElementsByClassName('js-message-great-game')[0];
+    const buttonTry = document.getElementsByClassName('js-button-try')[0];
+    const buttonStart = document.getElementsByClassName('js-button-start')[0];
 
     //values player
     var redValue;
@@ -82,7 +81,7 @@
                 colorsMessages[i].classList.remove('message--fail');
                 colorsMessages[i].className += " message--success";
                 colorFound++;
-            } else if (colorsPlayer[i] === '') {
+            } else if (colorsPlayer[i] === "") {
                 message = "at least one number :)";
                 colorsMessages[i].className += " message--fail";
             } else if (colorsRandom[i] > colorsPlayer[i]) {
@@ -118,24 +117,31 @@
             buttonTry.textContent = "RETRY";
             elemColorPannelPlayer.style.display = "flex";
             elemMessagesColor.style.display = "block";
-            
+
             //recuperer input
-            redValue = Number(redInput.value);
-            greenValue = Number(greenInput.value);
-            blueValue = Number(blueInput.value);
+            if (redInput.value !== "" && redInput.value.length  > 0)  {
+                redValue = Number(redInput.value);
+            }
+            if (greenInput.value !== "" && greenInput.value.length > 0)  {
+                greenValue = Number(greenInput.value);
+            }
+            if (blueInput.value !== "" && blueInput.value.length > 0)  {
+                blueValue = Number(blueInput.value);
+            }
+            
             playerRgb = `rgb(${redValue},${greenValue},${blueValue})`;
             elemColorCreatedByPlayer.style.backgroundColor = playerRgb;
             comparison();
         });
         document.addEventListener('keydown', function (event) {
             if (event.keyCode === 13) {
-                buttonTry.click();            
+                buttonTry.click();
                 event.preventDefault();
             }
 
         });
     });
-    
+
 
 
 
