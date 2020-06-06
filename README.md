@@ -1,5 +1,10 @@
-# Hello World!
+# Hello Colored World Games!
 
-This is my first project on GitHub, I searched for games when I was learning about colors to train myself having some colors in mind quickly.
+These games is a kind of training to find code color in rgb, hsl and hexa.
+Different modes will be soon available to be funnier!
 
-So the idea of creating it myself sounded fun! here we go :)
+## Run it
+
+`npm i`
+
+`npm run start`

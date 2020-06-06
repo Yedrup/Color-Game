@@ -1,0 +1,20 @@
+{
+  "name": "colorsgames",
+  "version": "0.0.1",
+  "description": "The aim is to find out the color code of a random generated color in rgb, hsl or hexa. Different difficulty modes will be available.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yedrup/Color-Game.git"
+  },
+  "author": "Purdey Chambraud",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yedrup/Color-Game/issues"
+  },
+  "homepage": "https://github.com/Yedrup/Color-Game#readme"
+}

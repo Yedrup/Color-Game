@@ -1,144 +1,76 @@
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
 body {
-    background-color: rgb(31, 29, 27);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: rgba(81, 159, 148, 0.789);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: rgb(31, 29, 27);
+  color: rgba(90, 233, 214, 0.975);
+}
+header {
+  width: 100%;
+  background-color: rgba(28, 18, 27, 0.749);
+  text-align: center;
 }
 
-.show {
-    display: flex;
+main {
+  margin: 2rem 0;
 }
 
-.hide {
-    display: none;
+form {
+  margin: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+  grid-gap: 1rem;
 }
 
-.text--black {
-	color: rgb(31, 29, 27);
+input[type='submit'] {
+  grid-column: 3;
+  padding: 1rem;
+  background-color: rgba(214, 0, 135, 0.81);
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2);
+  border: none;
+  color: white;
 }
 
-.text--silver {
-    color: rgb(192, 192, 192);
+.game-board {
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.632);
+  border-radius: 5px;
 }
 
-.title {
-    margin-bottom: 0;
-    margin-top: 2rem;
+.bloc-player-color {
+  position: relative;
+  width: 100%;
+  height: 5rem;
+  border: 1px solid rgb(0, 0, 0);
+}
+.bloc-player-color span {
+  position: absolute;
+  bottom: -1.5rem;
+  right: 0;
+  color: rgba(204, 223, 221, 0.699);
 }
 
-.rules__text {
-	font-size: 1.25rem;
-	font-weight: bold;
+.game__title {
+  color: rgba(90, 233, 214, 0.975);
 }
 
-.rules {
-    line-height: 1rem;
-    text-align: center;
+.input__parent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 1rem;
+  padding: 1rem 0.25rem;
 }
-
-.message--success {
-    color: rgb(220, 236, 220);
+label {
+  color: rgb(204, 223, 221);
 }
-
-.message--great-game {
-    color: rgb(220, 236, 220);
-    font-size: 2rem;
-    margin: .5rem 0;
-}
-
-.message--success:after {
-    content: " \2713";
-}
-
-.message--fail {
-    color: rgb(150, 15, 15);
-}
-
-.message--fail:after {
-    content: " \2717";
-}
-
-.game-pannel {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-width: 20rem;
-    height: auto;
-    padding: 2rem 3rem;
-    background-color: rgba(81, 159, 148, 0.7);
-    border-radius: 2rem;
-}
-
-.color-pannel {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    align-items: center;
-    margin-bottom: 1rem;
-    margin-left: .15rem;
-}
-
-.color__input {
-    width: 25%;
-}
-
-.color-view {
-    width: 4rem;
-    height: 4rem;
-    margin-left: .75rem;
-    border: 1px solid rgba(0, 0, 0, 0.668);
-}
-
-.color-pannel--player,
-.messageOther {
-    display: none;
-}
-
-.answers {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.answers label {
-    align-self: center;
-    color: rgb(31, 29, 27);
-    font-weight: bold;
-}
-
-.input-color {
-    max-width: 2.8rem;
-    font-size: 1.5rem;
-    color: rgb(100, 100, 100);
-}
-
-.input--red {
-    background-color: rgb(255, 100, 100);
-}
-
-.input--green {
-    background-color: rgb(100, 200, 100);
-}
-
-.input--blue {
-    background-color: rgb(100, 150, 255);
-}
-
-.button {
-    color: rgb(250, 250, 250);
-    border: none;
-    border-radius: .5rem;
-    padding: .75rem .5rem;
-    outline: none;
-}
-
-.button--start {
-    background-color: rgb(46, 79, 107);
-    margin-bottom: 2rem;
-}
-
-.button--try {
-    background-color: rgb(31, 29, 27);
-    margin: 1rem 0 1rem 1rem;
+.input--color {
+  width: 4rem;
+  font-size: 1.4rem;
 }
