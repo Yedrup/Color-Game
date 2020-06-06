@@ -8,3 +8,4 @@ Different modes will be soon available to be funnier!
 `npm i`
 
 `npm run start`
+
