@@ -2,7 +2,7 @@ import { generateRandom } from './utils';
 
 export const gameRBG = {
   name: 'rgb',
-  nameProperties: ['red', 'green', 'blue'],
+  namePropertiesToFind: ['red', 'green', 'blue'],
   UI: {
     title: 'Find the background RBG color',
     inputs: [
@@ -24,9 +24,9 @@ export const gameRBG = {
     ],
   },
   generateColor: function () {
-    let red = generateRandom(255);
-    let green = generateRandom(255);
-    let blue = generateRandom(255);
+    let red = generateRandom();
+    let green = generateRandom();
+    let blue = generateRandom();
     return {
       red,
       green,
@@ -42,7 +42,7 @@ export const gameRBG = {
 // TODO: need to disable input for lightness and saturation depending mode
 export const gameHSL = {
   name: 'hsl',
-  nameProperties: ['hue', 'saturation', 'lightness'],
+  namePropertiesToFind: ['hue', 'saturation', 'lightness'],
   UI: {
     title: 'Find the background in HSL',
     inputs: [
@@ -79,5 +79,51 @@ export const gameHSL = {
   },
   formatColor: function ({ hue, saturation, lightness }) {
     return `hsl(${hue},${saturation}%,${lightness}%)`;
+  },
+};
+
+export const gameHEXA = {
+  name: 'hexa',
+  namePropertiesToFind: ['red', 'green', 'blue'],
+  UI: {
+    title: 'Find the background in Hexa',
+    inputs: [
+      {
+        name: 'red',
+        pattern: '[A-F0-9]{10}',
+        maxValue: 'FF',
+        valueType: 'text',
+      },
+      {
+        name: 'green',
+        maxValue: 'FF',
+        pattern: '[A-F0-9]{10}',
+        valueType: 'text',
+      },
+      {
+        name: 'blue',
+        maxValue: 'FF',
+        pattern: '[A-F0-9]{10}',
+        valueType: 'text',
+      },
+    ],
+  },
+  generateColor: function (mode = 'easy') {
+    let isEasyMode = mode === 'easy';
+    let hexa = generateRandom(16777215, 'hexa');
+    let hexaInArray = hexa.split('');
+    let red = hexaInArray.slice(0, 2).join('');
+    let green = hexaInArray.slice(2, 4).join('');
+    let blue = hexaInArray.slice(4, 6).join('');
+    console.log({ hexaInArray, red, green, blue });
+    return {
+      red,
+      green,
+      blue,
+      string: `#${hexa}`,
+    };
+  },
+  formatColor: function ({ red, green, blue }) {
+    return `#${red}${green}${blue}`;
   },
 };
