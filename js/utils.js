@@ -13,10 +13,23 @@ export const generateRandom = (numMax = RGB_MAX_NUMBER, isHexa = '') => {
 };
 
 export const colorIcon = {
-  red: '💔',
-  green: '💚',
-  blue: '💙',
+  red: '🔴',
+  green: '🟢',
+  blue: '🔵',
   hue: '🎨',
   saturation: '☯︎',
   lightness: '🔅',
 };
+
+export function createRefElObject(
+  selectorToSearch,
+  attributeToUseAsProp = 'name'
+) {
+  return Array.from(document.querySelectorAll(selectorToSearch)).reduce(
+    (acc, curr) => {
+      acc[curr[attributeToUseAsProp]] = curr;
+      return acc;
+    },
+    {}
+  );
+}
