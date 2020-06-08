@@ -2,7 +2,13 @@
 const VALUE_TO_GET_HEXA = 16777215;
 const RADIX_HEXA = 16;
 const RGB_MAX_NUMBER = 255;
-export const generateRandom = (numMax = RGB_MAX_NUMBER, isHexa = '') => {
+
+const MS_IN_1_MIN = 60000;
+const MS_IN_1_SEC = 1000;
+const SEC_IN_1_MIN = 60;
+
+// COLORS
+const generateRandom = (numMax = RGB_MAX_NUMBER, isHexa = '') => {
   if (isHexa === 'hexa') {
     let hexa = Math.floor(Math.random() * VALUE_TO_GET_HEXA).toString(
       RADIX_HEXA
@@ -12,7 +18,7 @@ export const generateRandom = (numMax = RGB_MAX_NUMBER, isHexa = '') => {
   return Math.floor((numMax + 1) * Math.random());
 };
 
-export const colorIcon = {
+const colorIcon = {
   red: '🔴',
   green: '🟢',
   blue: '🔵',
@@ -21,10 +27,7 @@ export const colorIcon = {
   lightness: '🔅',
 };
 
-export function createRefElObject(
-  selectorToSearch,
-  attributeToUseAsProp = 'name'
-) {
+function createRefElObject(selectorToSearch, attributeToUseAsProp = 'name') {
   return Array.from(document.querySelectorAll(selectorToSearch)).reduce(
     (acc, curr) => {
       acc[curr[attributeToUseAsProp]] = curr;
@@ -33,3 +36,24 @@ export function createRefElObject(
     {}
   );
 }
+
+// TIME
+
+const formatTimeout = (timeInMS) => {
+  let timeInSecondes = Math.floor(timeInMS / MS_IN_1_SEC).toFixed();
+  let timeInMinutes = Math.floor(timeInSecondes / SEC_IN_1_MIN).toFixed();
+
+  let s = timeInSecondes % SEC_IN_1_MIN;
+  let m = timeInMinutes % SEC_IN_1_MIN;
+  return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+};
+
+export {
+  formatTimeout,
+  createRefElObject,
+  colorIcon,
+  generateRandom,
+  MS_IN_1_MIN,
+  MS_IN_1_SEC,
+  SEC_IN_1_MIN,
+};

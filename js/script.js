@@ -1,36 +1,23 @@
-import { generateRandom, colorIcon, createRefElObject } from './utils';
-import { modeTest } from './dataPattern.js';
+import { modeTest } from './modes.js';
 // TODO: conditional import
 import { gameRBG, gameHSL, gameHEXA } from './games.js';
 // TODO: logic to have the mode and game selected
 
-const gameBoardEl = document.querySelector('.game-board');
-const gameFormEl = document.createElement('form');
-const gameFieldSetEl = document.createElement('fieldset');
+import {
+  gameBoardEl,
+  gameFormEl,
+  gameFieldSetEl,
+  setTheBoard,
+  playerColorBlocEl,
+  colorInputsElRefObj,
+  messageDisplayEls,
+  buttonSubmitEl,
+  timeIntervalTimeoutIds,
+} from './elements';
 
-let playerColorBlocEl;
-let colorInputsElRefObj = {};
-let messageDisplayEls = {};
+// TODO: add in lib
 let colorsRemainingToFind;
 let game;
-
-function generateInputsHTML(inputsArray) {
-  return inputsArray
-    .map(({ name, maxValue, valueType, pattern = null }) => {
-      return `
-      <div class="input__parent input__parent--${name}">
-        <label name=${name}>${name}</label>
-        <input class="input--color input--color--${name}" ${
-        pattern ? (pattern = pattern) : ''
-      } type=${valueType} name=${name} value=${generateRandom(
-        255
-      )} required max=${maxValue}/>
-      <span id="message-el-${name}" class="message-input-to-display"></span>
-      </div>
-      `;
-    })
-    .join('');
-}
 
 function displayMessage(message, color) {
   console.log(message, color);
@@ -68,13 +55,13 @@ function evaluateAnswer(colorPlayer, colorToFind) {
     let isTheSameColor = colorPlayer[color] === colorToFind[color];
     if (isTheSameColor) {
       // manage a color found
-      colorFound(color);
       displayMessage('✅', color);
+      colorFound(color);
       return;
     } else if (colorPlayer[color] < colorToFind[color]) {
-      displayMessage(`⬆️ ${colorIcon[color]}`, color);
+      displayMessage(`⬆️`, color);
     } else if (colorPlayer[color] > colorToFind[color]) {
-      displayMessage(`⬇️ ${colorIcon[color]}`, color);
+      displayMessage(`⬇️`, color);
     } else {
       console.log(
         'something went wrong',
@@ -109,36 +96,15 @@ function handleSubmit(e) {
   evaluateAnswer(valuesPlayer, game.colorToFind);
 }
 
-function setForm() {
-  gameBoardEl.insertAdjacentElement('beforeend', gameFormEl);
-  gameFormEl.classList.add(`game-form`, `game-form--${game.name}`);
-  gameFormEl.setAttribute('autocomplete', 'off');
-  gameFormEl.insertAdjacentElement('afterbegin', gameFieldSetEl);
-
-  const inputsToCreate = generateInputsHTML(game.UI.inputs);
-  const validateInput = `<input value=submit type="submit"/>`;
-  document.body.style.background = game.colorToFind.string;
-
-  const allHTML = inputsToCreate + validateInput;
-  gameFieldSetEl.innerHTML = allHTML;
-
-  // create objects of refs for input and message
-  colorInputsElRefObj = createRefElObject('input.input--color');
-  messageDisplayEls = createRefElObject('.message-input-to-display', 'id');
-}
-
-function setTheBoard() {
-  const titleHTMl = `<h2 class="game__title">${game.UI.title}</h2>`;
-  const playerColorBloc = `<div class="bloc-player-color"><span>color you've created</span></div>`;
-  gameBoardEl.innerHTML = titleHTMl + playerColorBloc;
-  playerColorBlocEl = document.querySelector('.bloc-player-color');
-  setForm();
-  gameBoardEl.hidden = false;
-}
-
 function handleEndOfGame(event) {
   console.log('THIS is the end', event);
   gameFieldSetEl.disabled = true;
+  buttonSubmitEl.disabled = true;
+  if (game.mode.isTimeout) {
+    const { timeoutId, intervalId } = timeIntervalTimeoutIds;
+    clearTimeout(timeoutId);
+    clearInterval(intervalId);
+  }
   // clear board
   // display message
   /* finish the game
@@ -151,6 +117,7 @@ function gameLifeCycle() {
   gameFormEl.addEventListener('submit', handleSubmit);
   gameBoardEl.addEventListener('endOfGame', handleEndOfGame);
 }
+
 function prepareGame(gameSelected, modeSelected) {
   game = {
     ...gameSelected,
@@ -160,7 +127,7 @@ function prepareGame(gameSelected, modeSelected) {
   game.colorToFind = game.generateColor();
   colorsRemainingToFind = game.namePropertiesToFind;
   // set the board
-  setTheBoard();
+  setTheBoard(game);
   gameLifeCycle();
 }
 
@@ -168,17 +135,3 @@ function prepareGame(gameSelected, modeSelected) {
 prepareGame(gameRBG, modeTest);
 // prepareGame(gameHSL, modeTest);
 // prepareGame(gameHEXA, modeTest);
-
-// TEST
-
-// const timoutInMS = 12000;
-// setTimeout(() => {
-//   gameBoardEl.dispatchEvent(
-//     new CustomEvent('endOfGame', {
-//       detail: {
-//         victory: false,
-//         cause: 'TIMEOUT',
-//       },
-//     })
-//   );
-// }, timoutInMS);

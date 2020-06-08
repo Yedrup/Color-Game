@@ -1,3 +1,11 @@
+:root {
+  --color-highlight: rgb(241, 245, 245);
+}
+
+*[disabled] {
+  opacity: 0.5;
+}
+
 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
@@ -22,7 +30,7 @@ main {
 }
 
 form {
-  margin: 2rem 1rem;
+  margin: 2rem 1rem 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
   grid-gap: 1rem;
@@ -41,10 +49,40 @@ input[type='submit'] {
   color: white;
 }
 
+.modeBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modeBox--timeout {
+  grid-column: 1;
+  font-size: 2.5rem;
+}
+.modeBox--count {
+  grid-column: 2;
+  font-size: 2.5rem;
+  font-style: italic;
+}
+
+.modebox__icon {
+  font-size: 2rem;
+  margin: 0 0.25rem;
+}
+
 .game-board {
   padding: 1rem;
   background: rgba(0, 0, 0, 0.632);
   border-radius: 5px;
+}
+
+.modeInfo {
+  margin-bottom: 1rem;
+}
+
+.u-highLightText {
+  color: var(--color-highlight);
+  margin: 0 0.25rem;
 }
 
 .bloc-player-color {
@@ -76,6 +114,10 @@ label {
   margin: 0.5rem 0;
 }
 .input--color {
-  width: 4rem;
+  max-width: 4rem;
   font-size: 1.4rem;
+}
+.message-input-to-display {
+  margin-top: 0.8rem;
+  min-height: 1.5rem;
 }

@@ -4,7 +4,7 @@ export const gameRBG = {
   name: 'rgb',
   namePropertiesToFind: ['red', 'green', 'blue'],
   UI: {
-    title: 'Find the background RBG color',
+    title: 'Find the background <span class="u-highLightText">RGB</span> color',
     inputs: [
       {
         name: 'red',
@@ -44,7 +44,7 @@ export const gameHSL = {
   name: 'hsl',
   namePropertiesToFind: ['hue', 'saturation', 'lightness'],
   UI: {
-    title: 'Find the background in HSL',
+    title: 'Find the background in <span class="u-highLightText">HSL</span>',
     inputs: [
       {
         name: 'hue',
@@ -86,7 +86,7 @@ export const gameHEXA = {
   name: 'hexa',
   namePropertiesToFind: ['red', 'green', 'blue'],
   UI: {
-    title: 'Find the background in Hexa',
+    title: 'Find the background in <span class="u-highLightText">HEXA</span> ',
     inputs: [
       {
         name: 'red',
@@ -109,7 +109,6 @@ export const gameHEXA = {
     ],
   },
   generateColor: function (mode = 'easy') {
-    let isEasyMode = mode === 'easy';
     let hexa = generateRandom(16777215, 'hexa');
     let hexaInArray = hexa.split('');
     let red = hexaInArray.slice(0, 2).join('');
