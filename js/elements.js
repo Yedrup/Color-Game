@@ -1,6 +1,6 @@
 import { generateRandom, createRefElObject } from './utils';
-import { createRulesHTML } from './modes';
-import { colorIcon, formatTimeout, MS_IN_1_SEC } from './utils';
+import { createRulesHTML } from './data/texts.js';
+import { colorIcon } from './utils';
 
 const gameBoardEl = document.querySelector('.game-board');
 const gameFormEl = document.createElement('form');
@@ -8,11 +8,11 @@ const gameFieldSetEl = document.createElement('fieldset');
 
 let playerColorBlocEl;
 let colorInputsElRefObj = {};
-let messageDisplayEls = {};
+let messageInputEls = {};
 let timeoutEl;
 let tryCountEl;
 let buttonSubmitEl;
-let timeIntervalTimeoutIds;
+let messageBoxEl;
 
 function generateInputsHTML(inputsArray) {
   return inputsArray
@@ -25,11 +25,17 @@ function generateInputsHTML(inputsArray) {
       } type=${valueType} name=${name} value=${generateRandom(
         255
       )} required max=${maxValue}/>
-      <span id="message-el-${name}" class="message-input-to-display"></span>
+      <span id="message-input-${name}" class="message-input-to-display"></span>
       </div>
       `;
     })
     .join('');
+}
+
+function setGameMessageBox() {
+  let messageBox = `<div hidden class="messageBox" ></div>`;
+  gameFormEl.insertAdjacentHTML('beforeend', messageBox);
+  messageBoxEl = document.querySelector('.messageBox');
 }
 
 function setForm({ name, UI, colorToFind }) {
@@ -46,83 +52,38 @@ function setForm({ name, UI, colorToFind }) {
   gameFieldSetEl.innerHTML = allHTML;
 
   // create objects of refs for input and message
-  let colorInputsElRefObjCreated = createRefElObject('input.input--color');
-  let messageDisplayElsCreated = createRefElObject(
-    '.message-input-to-display',
-    'id'
-  );
-
-  return { colorInputsElRefObjCreated, messageDisplayElsCreated };
+  colorInputsElRefObj = createRefElObject('input.input--color');
+  messageInputEls = createRefElObject('.message-input-to-display', 'id');
 }
 
-function displayTimeRemaining(timeRemainingInMS) {
-  timeoutEl.innerHTML = formatTimeout(timeRemainingInMS);
-  timeRemainingInMS -= MS_IN_1_SEC;
-}
-
-// TODO: Time management in its own file.
-function setImmediateInterval(funcToRun, ms) {
-  // From Wes Bos JS course
-  // right away call that function
-  funcToRun();
-  // return the id of the setInterval
-  return setInterval(funcToRun, ms);
-}
-
-function setTimeoutTest(timeInMS) {
-  let timeoutId = setTimeout(() => {
-    clearInterval(intervalId);
-  }, timeInMS);
-  let intervalId = setImmediateInterval(
-    () => displayTimeRemaining((timeInMS -= MS_IN_1_SEC)),
-    MS_IN_1_SEC
-  );
-  return { timeoutId, intervalId };
-}
-
-function setModeEls(mode) {
-  const { isTimeout, isCountOfTries, difficulty } = mode;
+function setModeEls({ isTimeout, isCountOfTries, ...additionalParams }) {
   if (isTimeout || isCountOfTries)
     buttonSubmitEl = document.querySelector('.button-submit');
   if (isTimeout) {
-    const { timeoutObjInMS } = mode;
-    let timeoutInMS = timeoutObjInMS[difficulty];
     timeoutEl = document.createElement('div');
     timeoutEl.classList.add('modeBox', 'modeBox--timeout');
     buttonSubmitEl.insertAdjacentElement('beforebegin', timeoutEl);
-    timeIntervalTimeoutIds = setTimeoutTest(timeoutInMS);
   }
   if (isCountOfTries) {
     tryCountEl = document.createElement('div');
     tryCountEl.classList.add('modeBox', 'modeBox--count');
     buttonSubmitEl.insertAdjacentElement('beforebegin', tryCountEl);
-    // TODO: hit management  + in its own file
-    tryCountEl.innerHTML =
-      '<span class="modebox__icon">🎯</span><span class="u-highLightText">5</span> ';
   }
+}
 
-  // This text will be in the player chose time
-  // const modeInfoEl = document.createElement('div');
-  // modeInfoEl.classList.add('modeInfo');
-  // const rulesHTML = createRulesHTML(mode);
-  // modeInfoEl.innerHTML = rulesHTML;
-  // playerColorBlocEl.insertAdjacentElement('beforebegin', modeInfoEl);
-  console.log({ isTimeout, isCountOfTries });
+function setPlayerColorBloc() {
+  return `<div class="playerBlocColor"><span>color you've created</span></div>`;
 }
 
 function setTheBoard(game) {
   const { UI, mode } = game;
   const titleHTMl = `<h2 class="game__title">${UI.title}</h2>`;
-  const playerColorBloc = `<div class="bloc-player-color"><span>color you've created</span></div>`;
-
-  gameBoardEl.innerHTML = titleHTMl + playerColorBloc;
-  playerColorBlocEl = document.querySelector('.bloc-player-color');
-  const { colorInputsElRefObjCreated, messageDisplayElsCreated } = setForm(
-    game
-  );
+  let playerColorBlocHTML = setPlayerColorBloc();
+  gameBoardEl.innerHTML = titleHTMl + playerColorBlocHTML;
+  playerColorBlocEl = document.querySelector('.playerBlocColor');
+  setForm(game);
   setModeEls(mode);
-  colorInputsElRefObj = colorInputsElRefObjCreated;
-  messageDisplayEls = messageDisplayElsCreated;
+  setGameMessageBox();
   gameBoardEl.hidden = false;
 }
 
@@ -135,10 +96,9 @@ export {
   setTheBoard,
   playerColorBlocEl,
   colorInputsElRefObj,
-  messageDisplayEls,
+  messageInputEls,
   timeoutEl,
   tryCountEl,
   buttonSubmitEl,
-  setTimeoutTest,
-  timeIntervalTimeoutIds,
+  messageBoxEl,
 };

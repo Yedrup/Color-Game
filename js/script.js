@@ -1,7 +1,5 @@
-import { modeTest } from './modes.js';
-// TODO: conditional import
-import { gameRBG, gameHSL, gameHEXA } from './games.js';
-// TODO: logic to have the mode and game selected
+import { modeTest } from './data/modes.js';
+import { gameRBG, gameHSL, gameHEXA } from './data/games.js';
 
 import {
   gameBoardEl,
@@ -10,38 +8,39 @@ import {
   setTheBoard,
   playerColorBlocEl,
   colorInputsElRefObj,
-  messageDisplayEls,
+  messageInputEls,
   buttonSubmitEl,
-  timeIntervalTimeoutIds,
+  messageBoxEl,
 } from './elements';
 
-// TODO: add in lib
+import { initTimeout, timeoutId, intervalId } from './timeout';
+import { initTriesRemaining, updateTriesRemaining } from './countOfTries';
+import { createEndGameMessage } from './data/texts';
+
+// TODO: add in lib file
 let colorsRemainingToFind;
 let game;
 
 function displayMessage(message, color) {
-  console.log(message, color);
   if (!color) console.log('display in a general element');
-  let displayMessageEl = messageDisplayEls[`message-el-${color}`];
-  console.log(colorInputsElRefObj[color], displayMessageEl);
+  let displayMessageEl = messageInputEls[`message-input-${color}`];
   displayMessageEl.textContent = message;
 }
 
 function colorFound(color) {
-  console.log('colorFound ✅', colorInputsElRefObj[color]);
   colorInputsElRefObj[color].disabled = true;
   let updatedNamePropertiesToFind = colorsRemainingToFind.filter(
     (curr) => curr !== color
   );
-  console.log(updatedNamePropertiesToFind);
   colorsRemainingToFind = updatedNamePropertiesToFind;
   if (!updatedNamePropertiesToFind.length) {
     // the game is finished, event endOfGame triggered
     gameBoardEl.dispatchEvent(
       new CustomEvent('endOfGame', {
         detail: {
-          victory: true,
-          result: 'this is a great success',
+          isVictory: true,
+          timeoutID: timeoutId,
+          intervalID: intervalId,
         },
       })
     );
@@ -74,8 +73,6 @@ function evaluateAnswer(colorPlayer, colorToFind) {
 
 function handleSubmit(e) {
   e.preventDefault();
-  console.dir(e);
-  console.log('game', game);
   const { formatColor, namePropertiesToFind } = game;
   const inputs = e.target.elements;
   // get the colors given by the player
@@ -94,28 +91,43 @@ function handleSubmit(e) {
   playerColorBlocEl.style.background = colorGeneratedByPlayerString;
   // evaluate answer
   evaluateAnswer(valuesPlayer, game.colorToFind);
+  if (game.mode.isCountOfTries) {
+    updateTriesRemaining();
+  }
 }
 
 function handleEndOfGame(event) {
-  console.log('THIS is the end', event);
+  console.log({ event });
   gameFieldSetEl.disabled = true;
   buttonSubmitEl.disabled = true;
   if (game.mode.isTimeout) {
-    const { timeoutId, intervalId } = timeIntervalTimeoutIds;
-    clearTimeout(timeoutId);
-    clearInterval(intervalId);
+    const { timeoutID = timeoutId, intervalID = intervalId } = event.detail;
+    clearTimeout(timeoutID);
+    clearInterval(intervalID);
   }
-  // clear board
-  // display message
-  /* finish the game
-   * display message + score
-   * save in LS
-   */
+  const finalMessage = createEndGameMessage(event, game);
+  messageBoxEl.innerHTML = finalMessage;
+  messageBoxEl.hidden = false;
+  // TODO: Manage Previous scores in LS (keep the 10 last best scores for each mode)
+  // TODO: Display a restart button AND a go back to the select page
 }
 
-function gameLifeCycle() {
+function gameLifeCycle({ isTimeout, isCountOfTries, difficulty, ...params }) {
+  if (isTimeout) {
+    // start timeout
+    const { timeoutObjInMS } = params;
+    let timeInMS = timeoutObjInMS[difficulty];
+    initTimeout(timeInMS);
+  }
+
+  if (isCountOfTries) {
+    const { triesAllowedObj } = params;
+    // start to count tries
+    initTriesRemaining(triesAllowedObj, difficulty);
+  }
+
   gameFormEl.addEventListener('submit', handleSubmit);
-  gameBoardEl.addEventListener('endOfGame', handleEndOfGame);
+  gameBoardEl.addEventListener('endOfGame', handleEndOfGame, { once: true });
 }
 
 function prepareGame(gameSelected, modeSelected) {
@@ -128,7 +140,7 @@ function prepareGame(gameSelected, modeSelected) {
   colorsRemainingToFind = game.namePropertiesToFind;
   // set the board
   setTheBoard(game);
-  gameLifeCycle();
+  gameLifeCycle(game.mode);
 }
 
 // TODO: START When the player has selected the game + its mode

@@ -1,4 +1,4 @@
-import { generateRandom } from './utils';
+import { generateRandom } from '../utils';
 
 export const gameRBG = {
   name: 'rgb',
@@ -23,7 +23,7 @@ export const gameRBG = {
       },
     ],
   },
-  generateColor: function () {
+  generateColor() {
     let red = generateRandom();
     let green = generateRandom();
     let blue = generateRandom();
@@ -34,7 +34,7 @@ export const gameRBG = {
       string: `rgb(${red},${green},${blue})`,
     };
   },
-  formatColor: function ({ red, green, blue }) {
+  formatColor({ red, green, blue }) {
     return `rgb(${red},${green},${blue})`;
   },
 };
@@ -65,7 +65,7 @@ export const gameHSL = {
       },
     ],
   },
-  generateColor: function (mode = 'easy') {
+  generateColor(mode = 'easy') {
     let isEasyMode = mode === 'easy';
     let hue = generateRandom(360);
     let saturation = isEasyMode ? 50 : generateRandom(100);
@@ -77,7 +77,7 @@ export const gameHSL = {
       string: `hsl(${hue},${saturation}%,${lightness}%)`,
     };
   },
-  formatColor: function ({ hue, saturation, lightness }) {
+  formatColor({ hue, saturation, lightness }) {
     return `hsl(${hue},${saturation}%,${lightness}%)`;
   },
 };
@@ -108,7 +108,7 @@ export const gameHEXA = {
       },
     ],
   },
-  generateColor: function (mode = 'easy') {
+  generateColor(mode = 'easy') {
     let hexa = generateRandom(16777215, 'hexa');
     let hexaInArray = hexa.split('');
     let red = hexaInArray.slice(0, 2).join('');
@@ -122,7 +122,7 @@ export const gameHEXA = {
       string: `#${hexa}`,
     };
   },
-  formatColor: function ({ red, green, blue }) {
+  formatColor({ red, green, blue }) {
     return `#${red}${green}${blue}`;
   },
 };
