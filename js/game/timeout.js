@@ -1,11 +1,10 @@
-import { timeoutEl, gameBoardEl } from './elements';
-import { formatTimeout, MS_IN_1_SEC } from './utils';
+import { timeoutEl, gameBoardEl } from '../game/elements';
+import { formatTimeout, MS_IN_1_SEC } from '../utils';
 
 let timeoutId, intervalId;
 
 function displayTimeRemaining(timeRemainingInMS) {
   timeoutEl.innerHTML = formatTimeout(timeRemainingInMS);
-  timeRemainingInMS -= MS_IN_1_SEC;
 }
 
 // Function from Wes Bos JS course

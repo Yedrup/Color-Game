@@ -16,35 +16,23 @@ const text = {
   },
 };
 
-function createRulesHTML(mode) {
-  const {
-    difficulty,
-    timeoutObjInMS,
-    triesAllowedObj,
-    isCountOfTries,
-    isTimeout,
-  } = mode;
-
-  let timeoutText = isTimeout
-    ? `<p>The timeout is set to <span class="u-highLightText">${timeoutObjInMS[difficulty]}</span> milliseconds,</p>`
-    : '';
-  let triesAllowedObjText = isCountOfTries
-    ? `<p>You have <span class="u-highLightText">${triesAllowedObj[difficulty]}</span> tries allowed,</p>`
-    : '';
-
-  return `<div class="infoMode">The mode selected is the <span class="u-highLightText">${difficulty}</span> one.${timeoutText}${triesAllowedObjText} Good Luck!</div>`;
-}
-
 function createEndGameMessage({ detail }, { mode, ...params }) {
   const { cause, isVictory } = detail;
   const { difficulty } = mode;
   let winStatus = isVictory ? ' have won !! 🤘' : ' have lost 🙁';
   let reason = !isVictory ? text.failure[cause] : '';
-  let advice = isVictory
-    ? text.success.advice[difficulty]
-    : text.failure.advice[difficulty];
+  let isAChallenge = !!(mode.isTimeout || mode.isCountOfTries);
+  let advice;
+  if (isAChallenge) {
+    advice = isVictory
+      ? text.success.advice[difficulty]
+      : text.failure.advice[difficulty];
+  } else {
+    advice =
+      'Try to challenge yourself adding limited time or hits or... BOTH! 💪';
+  }
 
   return `You${winStatus}</br>${reason}</br>${advice ? advice : ''}`;
 }
 
-export { createRulesHTML, createEndGameMessage };
+export { createEndGameMessage };

@@ -2,25 +2,24 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="description"
-        content="A game to help people to understand the way colors are created in rgb (red green blue) and quickly gain in time to guess how a color is made. Which can be useful sometimes." />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" type="./images/explosion-name-sm.png" href="./images/explosion-name-sm.png" />
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
+    <meta charset='utf-8'>
+    <meta name='description'
+        content='The challenge of Color Games is to found out what is the color code of a random generated color. You can select rgb(red green blue), hsl (hue, saturation, lightness) or hexa. Two modes are available: limited time or limited hits allowed!' />
+    <meta name='viewport' content='width=device-width,initial-scale=1.0'>
+    <link rel='icon' type='./images/explosion-name-sm.png' href='./images/explosion-name-sm.png' />
+    <link rel='stylesheet' href='css/main.css'>
     <title>Color Games!</title>
 </head>
 
 <body>
     <header>
-        <h1>Hello <span>(colored)</span> world!</h1>
+        <h1>Hello <span class="colored-title">(colored)</span> world!</h1>
     </header>
     <main>
-        <div class="select-game-panel"></div>
-        <div class="game-board" hidden></div>
+        <div class='js-select-game-panel'></div>
+        <div class='game-board js-game-board' hidden></div>
     </main>
-    <script type="module" src="./js/script.js"></script>
+    <script type='module' src='./js/script.js'></script>
 </body>
 
 </html>

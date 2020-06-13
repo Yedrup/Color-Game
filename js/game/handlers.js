@@ -4,9 +4,9 @@ import {
   playerColorBlocEl,
   buttonSubmitEl,
   messageBoxEl,
-} from '../elements';
-import { updateTriesRemaining } from '../countOfTries';
-import { timeoutId, intervalId } from '../timeout';
+} from '../game/elements';
+import { updateTriesRemaining } from './countOfTries';
+import { timeoutId, intervalId } from './timeout';
 import { createEndGameMessage } from '../data/texts';
 
 function handleSubmit(e) {
@@ -15,12 +15,13 @@ function handleSubmit(e) {
   const inputs = e.target.elements;
   // get the colors given by the player
   const valuesPlayer = namePropertiesToFind.reduce((acc, color) => {
-    let isNumber = inputs[color].type === 'number';
+    let currentInput = inputs[color];
+    let isNumber = currentInput.type === 'number';
     let playerInputVal = isNumber
-      ? parseInt(inputs[color].value)
-      : inputs[color].value.toLowerCase();
+      ? parseInt(currentInput.value)
+      : currentInput.value.toLowerCase();
 
-    inputs[color].setAttribute('value', inputs[color].value);
+    currentInput.setAttribute('value', currentInput.value);
 
     return { ...acc, [color]: playerInputVal };
   }, {});
@@ -34,10 +35,20 @@ function handleSubmit(e) {
   }
 }
 
+function handleInputFocus(e) {
+  e.target.select();
+}
+
+// TODO: Reset the game
+function handleReset(e) {
+  console.log('reset all value');
+  // lib game resetGame()
+}
+
 function handleEndOfGame(event) {
-  console.log({ event });
   gameFieldSetEl.disabled = true;
   buttonSubmitEl.disabled = true;
+
   if (game.mode.isTimeout) {
     const { timeoutID = timeoutId, intervalID = intervalId } = event.detail;
     clearTimeout(timeoutID);
@@ -50,4 +61,4 @@ function handleEndOfGame(event) {
   // TODO: Display a restart button AND a go back to the select page
 }
 
-export { handleSubmit, handleEndOfGame };
+export { handleSubmit, handleEndOfGame, handleInputFocus };

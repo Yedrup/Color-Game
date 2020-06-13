@@ -1,0 +1,28 @@
+@keyframes jump {
+  0% {
+    transform: scale(3) rotate(-50deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+@keyframes colored {
+  0% {
+    background-position: center center;
+    transform: scale(2);
+  }
+  25% {
+    background-position: center left;
+  }
+  50% {
+    background-position: center right;
+    transform: scale(1);
+  }
+  75% {
+    background-position: center right;
+    transform: scale(2);
+  }
+  100% {
+    background-position: center left;
+  }
+}

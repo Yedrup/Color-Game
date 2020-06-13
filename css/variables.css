@@ -1,0 +1,11 @@
+:root {
+  --contrast-color: rgb(241, 245, 245);
+  --border-radius: 10px;
+  --highlight--secondary-color: rgba(90, 233, 214, 0.975);
+  --highlight--primary-color: rgba(226, 2, 144, 0.851);
+  --border-color: rgba(226, 162, 206, 0.187);
+  --text-primary-color: #8ec6b5;
+  --text-primary-color: #c68ebd;
+  --card-background-color: rgba(0, 0, 0, 0.899);
+  --main-background-color: rgb(62, 7, 42);
+}

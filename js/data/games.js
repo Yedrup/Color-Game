@@ -1,10 +1,11 @@
 import { generateRandom } from '../utils';
-
-export const gameRBG = {
-  name: 'rgb',
+const gameRGB = {
+  name: 'RGB',
+  url: 'https://www.w3schools.com/colors/colors_rgb.asp',
   namePropertiesToFind: ['red', 'green', 'blue'],
   UI: {
-    title: 'Find the background <span class="u-highLightText">RGB</span> color',
+    title:
+      'Find the background color of left block <span class="u-highLightText">RGB</span> color',
     inputs: [
       {
         name: 'red',
@@ -40,11 +41,13 @@ export const gameRBG = {
 };
 
 // TODO: need to disable input for lightness and saturation depending mode
-export const gameHSL = {
-  name: 'hsl',
+const gameHSL = {
+  name: 'HSL',
+  url: 'https://www.w3schools.com/colors/colors_hsl.asp',
   namePropertiesToFind: ['hue', 'saturation', 'lightness'],
   UI: {
-    title: 'Find the background in <span class="u-highLightText">HSL</span>',
+    title:
+      'Find the background color of left block in <span class="u-highLightText">HSL</span>',
     inputs: [
       {
         name: 'hue',
@@ -65,11 +68,11 @@ export const gameHSL = {
       },
     ],
   },
-  generateColor(mode = 'easy') {
-    let isEasyMode = mode === 'easy';
-    let hue = generateRandom(360);
-    let saturation = isEasyMode ? 50 : generateRandom(100);
-    let lightness = isEasyMode ? 50 : generateRandom(100);
+  generateColor(difficulty = 'easy') {
+    let isEasyDifficulty = difficulty === 'easy';
+    let hue = generateRandom({ numMax: 360 });
+    let saturation = isEasyDifficulty ? 50 : generateRandom({ numMax: 100 });
+    let lightness = isEasyDifficulty ? 50 : generateRandom({ numMax: 100 });
     return {
       hue,
       saturation,
@@ -82,11 +85,13 @@ export const gameHSL = {
   },
 };
 
-export const gameHEXA = {
-  name: 'hexa',
+const gameHEX = {
+  name: 'HEX',
+  url: 'https://www.w3schools.com/colors/colors_hexadecimal.asp',
   namePropertiesToFind: ['red', 'green', 'blue'],
   UI: {
-    title: 'Find the background in <span class="u-highLightText">HEXA</span> ',
+    title:
+      'Find the background color of the left block in <span class="u-highLightText">HEX</span> ',
     inputs: [
       {
         name: 'red',
@@ -109,20 +114,23 @@ export const gameHEXA = {
     ],
   },
   generateColor(mode = 'easy') {
-    let hexa = generateRandom(16777215, 'hexa');
-    let hexaInArray = hexa.split('');
-    let red = hexaInArray.slice(0, 2).join('');
-    let green = hexaInArray.slice(2, 4).join('');
-    let blue = hexaInArray.slice(4, 6).join('');
-    console.log({ hexaInArray, red, green, blue });
+    let hex = generateRandom({ isHex: true });
+    let hexInArray = hex.split('');
+    let red = hexInArray.slice(0, 2).join('');
+    let green = hexInArray.slice(2, 4).join('');
+    let blue = hexInArray.slice(4, 6).join('');
     return {
       red,
       green,
       blue,
-      string: `#${hexa}`,
+      string: `#${hex}`,
     };
   },
   formatColor({ red, green, blue }) {
     return `#${red}${green}${blue}`;
   },
 };
+
+const gamesObj = { gameRGB, gameHSL, gameHEX };
+
+export default gamesObj;

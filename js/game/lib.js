@@ -4,31 +4,19 @@ import {
   setTheBoard,
   colorInputsElRefObj,
   messageInputEls,
-} from '../elements';
-
-import { initTimeout, timeoutId, intervalId } from '../timeout';
-import { initTriesRemaining } from '../countOfTries';
-
-import { gameRBG, gameHSL, gameHEXA } from '../data/games.js';
-import { modeTest } from '../data/modes.js';
-
+} from '../game/elements';
+import { initTimeout, timeoutId, intervalId } from './timeout';
+import { initTriesRemaining } from './countOfTries';
 import { handleSubmit, handleEndOfGame } from './handlers';
 
-// TODO: add in lib file
 let colorsRemainingToFind;
 let game;
 
-function startGame() {
-  // TODO: START When the player has selected the game + its mode
-  // prepareGame(gameRBG, modeTest);
-  // prepareGame(gameHSL, modeTest);
-  // prepareGame(gameHEXA, modeTest);
-  console.log('init game');
-  prepareGame(gameRBG, modeTest);
+function startGame(gameName, mode) {
+  prepareGame(gameName, mode);
 }
 
 function displayMessage(message, color) {
-  if (!color) console.log('display in a general element');
   let displayMessageEl = messageInputEls[`message-input-${color}`];
   displayMessageEl.textContent = message;
 }
@@ -55,7 +43,6 @@ function colorFound(color) {
 }
 
 function evaluateAnswer(colorPlayer, colorToFind) {
-  console.log({ colorPlayer, colorToFind });
   Object.keys(colorPlayer).forEach((color) => {
     let isTheSameColor = colorPlayer[color] === colorToFind[color];
     if (isTheSameColor) {
@@ -64,9 +51,9 @@ function evaluateAnswer(colorPlayer, colorToFind) {
       colorFound(color);
       return;
     } else if (colorPlayer[color] < colorToFind[color]) {
-      displayMessage(`⬆️`, color);
+      displayMessage(`need ⬆️`, color);
     } else if (colorPlayer[color] > colorToFind[color]) {
-      displayMessage(`⬇️`, color);
+      displayMessage(`need ⬇️`, color);
     } else {
       console.log(
         'something went wrong',
@@ -101,7 +88,8 @@ function prepareGame(gameSelected, modeSelected) {
     mode: { ...modeSelected },
   };
   // generate color
-  game.colorToFind = game.generateColor();
+  const { difficulty } = modeSelected;
+  game.colorToFind = game.generateColor(difficulty);
   colorsRemainingToFind = game.namePropertiesToFind;
   // set the board
   setTheBoard(game);

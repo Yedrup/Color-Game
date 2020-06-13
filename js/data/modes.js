@@ -1,28 +1,38 @@
+import { formatTimeout } from '../utils';
+
+function formatModeTimeoutObj(modeObject) {
+  return Object.entries(modeObject).reduce((acc, [mode, timeInMs]) => {
+    acc[mode] = `${formatTimeout(timeInMs)}`;
+    return acc;
+  }, {});
+}
+
+export const timeoutModeInMS = {
+  easy: 120000,
+  medium: 90000,
+  hard: 60000,
+};
+
+export const hitsMode = {
+  easy: 30,
+  medium: 20,
+  hard: 10,
+};
+let formattedTimeoutObj = formatModeTimeoutObj(timeoutModeInMS);
+export const timeoutMode = formattedTimeoutObj;
+
 class Mode {
-  constructor({ difficulty, isTimeout, isCountOfTries }) {
+  constructor({
+    difficulty = 'easy',
+    isTimeout = false,
+    isCountOfTries = false,
+  }) {
     this.difficulty = difficulty; // medium, hard,
     this.isTimeout = isTimeout;
     this.isCountOfTries = isCountOfTries;
-    this.timeoutObjInMS = {
-      easy: 210000,
-      medium: 180000,
-      hard: 150000,
-    };
-    this.triesAllowedObj = {
-      easy: 50,
-      medium: 30,
-      hard: 15,
-    };
+    this.timeoutObjInMS = { ...timeoutModeInMS };
+    this.triesAllowedObj = { ...hitsMode };
   }
 }
 
-// TODO: Object completed during user choice
-let options = {
-  difficulty: 'easy',
-  isTimeout: true,
-  isCountOfTries: true,
-};
-
-let modeTest = new Mode(options);
-
-export { modeTest };
+export default Mode;

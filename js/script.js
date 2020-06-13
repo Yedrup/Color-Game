@@ -1,3 +1,8 @@
-import { startGame } from './lib/lib';
+import { startGame } from './game/lib';
+import { askToSelectGame } from './select-game/lib';
 
-startGame();
+async function startGameManagement() {
+  const { game, mode } = await askToSelectGame();
+  startGame(game, mode);
+}
+startGameManagement();

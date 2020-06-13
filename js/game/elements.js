@@ -1,11 +1,13 @@
-import { generateRandom, createRefElObject } from './utils';
-import { createRulesHTML } from './data/texts.js';
-import { colorIcon } from './utils';
+import { createRefElObject } from '../utils';
+import { formSelectEl } from '../select-game/elements';
+import { handleInputFocus } from './handlers';
+import { generateInputsHTML, generateColorBlocksHTML } from './templates';
+const gameBoardEl = document.querySelector('.js-game-board');
 
-const gameBoardEl = document.querySelector('.game-board');
 const gameFormEl = document.createElement('form');
 const gameFieldSetEl = document.createElement('fieldset');
 
+let findColorBlocEl;
 let playerColorBlocEl;
 let colorInputsElRefObj = {};
 let messageInputEls = {};
@@ -13,24 +15,6 @@ let timeoutEl;
 let tryCountEl;
 let buttonSubmitEl;
 let messageBoxEl;
-
-function generateInputsHTML(inputsArray) {
-  return inputsArray
-    .map(({ name, maxValue, valueType, pattern = null }) => {
-      return `
-      <div class="input__parent input__parent--${name}">
-        <label name=${name}>${colorIcon[name]} ${name}</label>
-        <input class="input--color input--color--${name}" ${
-        pattern ? (pattern = pattern) : ''
-      } type=${valueType} name=${name} value=${generateRandom(
-        255
-      )} required max=${maxValue}/>
-      <span id="message-input-${name}" class="message-input-to-display"></span>
-      </div>
-      `;
-    })
-    .join('');
-}
 
 function setGameMessageBox() {
   let messageBox = `<div hidden class="messageBox" ></div>`;
@@ -40,25 +24,28 @@ function setGameMessageBox() {
 
 function setForm({ name, UI, colorToFind }) {
   gameBoardEl.insertAdjacentElement('beforeend', gameFormEl);
-  gameFormEl.classList.add(`game-form`, `game-form--${name}`);
   gameFormEl.setAttribute('autocomplete', 'off');
+  gameFormEl.classList.add(`game-form`, `game-form--${name}`);
   gameFormEl.insertAdjacentElement('afterbegin', gameFieldSetEl);
+  gameFieldSetEl.classList.add('game-fieldset');
 
   const inputsToCreate = generateInputsHTML(UI.inputs);
   const validateInput = `<input class="button-submit" value=submit type="submit"/>`;
-  document.body.style.background = colorToFind.string;
+
+  findColorBlocEl.style.background = colorToFind.string;
 
   const allHTML = inputsToCreate + validateInput;
   gameFieldSetEl.innerHTML = allHTML;
+  buttonSubmitEl = document.querySelector('.button-submit');
 
   // create objects of refs for input and message
   colorInputsElRefObj = createRefElObject('input.input--color');
   messageInputEls = createRefElObject('.message-input-to-display', 'id');
+
+  gameFormEl.addEventListener('focusin', handleInputFocus);
 }
 
 function setModeEls({ isTimeout, isCountOfTries, ...additionalParams }) {
-  if (isTimeout || isCountOfTries)
-    buttonSubmitEl = document.querySelector('.button-submit');
   if (isTimeout) {
     timeoutEl = document.createElement('div');
     timeoutEl.classList.add('modeBox', 'modeBox--timeout');
@@ -71,19 +58,17 @@ function setModeEls({ isTimeout, isCountOfTries, ...additionalParams }) {
   }
 }
 
-function setPlayerColorBloc() {
-  return `<div class="playerBlocColor"><span>color you've created</span></div>`;
-}
-
 function setTheBoard(game) {
   const { UI, mode } = game;
   const titleHTMl = `<h2 class="game__title">${UI.title}</h2>`;
-  let playerColorBlocHTML = setPlayerColorBloc();
-  gameBoardEl.innerHTML = titleHTMl + playerColorBlocHTML;
-  playerColorBlocEl = document.querySelector('.playerBlocColor');
+  let blocsColorBlocHTML = generateColorBlocksHTML();
+  gameBoardEl.innerHTML = titleHTMl + blocsColorBlocHTML;
+  playerColorBlocEl = document.querySelector('.js-blocColor-player');
+  findColorBlocEl = document.querySelector('.js-blocColor-find');
   setForm(game);
   setModeEls(mode);
   setGameMessageBox();
+  formSelectEl ? (formSelectEl.hidden = true) : null;
   gameBoardEl.hidden = false;
 }
 
@@ -101,4 +86,5 @@ export {
   tryCountEl,
   buttonSubmitEl,
   messageBoxEl,
+  findColorBlocEl,
 };

@@ -1,21 +1,8 @@
-@keyframes jump {
-  0% {
-    transform: scale(3) rotate(-50deg);
-  }
-  100% {
-    transform: scale(1) rotate(0);
-  }
-}
+/* TODO: Re-organize, rename classes  */
 
-:root {
-  --color-highlight: rgb(241, 245, 245);
-  --border-radius: 10px;
-}
-
-.u-highLightText {
-  color: var(--color-highlight);
-  margin: 0 0.25rem;
-}
+@import './normalize.css';
+@import './variables.css';
+@import './animations.css';
 
 *[disabled] {
   opacity: 0.5;
@@ -32,35 +19,149 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: rgb(31, 29, 27);
-  color: rgba(90, 233, 214, 0.975);
+  background-color: var(--main-background-color);
+  color: var(--text-primary-color);
 }
+
 header {
   width: 100%;
-  background-color: rgba(28, 18, 27, 0.749);
+  background-color: rgba(0, 0, 0, 0.632);
   text-align: center;
+  color: var(--highlight--secondary-color);
+}
+
+.colored-title {
+  background: url(../images/background.png) no-repeat;
+  background-position: left;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  color: var(--contrast-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: colored 0.7s ease-in;
 }
 
 main {
   margin: 2rem 0;
+  min-width: 60%;
 }
 
-.game-board {
-  max-width: 35rem;
-  min-width: 30rem;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.934);
+label {
+  margin: 0.5rem 0;
+}
+
+.u-highLightText {
+  color: var(--contrast-color);
+  margin: 0 0.25rem;
+}
+
+.u-highLightText--selected {
+  color: var(--contrast-color);
+  position: relative;
+  white-space: nowrap;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+}
+
+.u-highLightText--selected:after {
+  content: '';
+  position: absolute;
+  top: 2.2rem;
+  height: 1px;
+  right: 0;
+  left: 0;
+  background-color: var(--highlight--secondary-color);
+}
+
+.parent-button--start-game {
+  display: flex;
+  justify-content: center;
+}
+
+.radio-toolbar input[type='radio'] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.radio-toolbar label {
+  display: inline-block;
+  padding: 1rem 1.5rem;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+  margin: 0.5rem 2rem 0 0;
+  border: 2px solid var(--border-color);
   border-radius: var(--border-radius);
 }
 
-form {
+.radio-toolbar label:hover {
+  background-color: var(--highlight--primary-color);
+  border-color: var(--highlight--secondary-color);
+  color: var(--contrast-color);
+  border-style: dotted;
+}
+
+.radio-toolbar input[type='radio']:checked + label {
+  background-color: var(--highlight--primary-color);
+  color: rgba(237, 233, 233, 0.932);
+  border-color: var(--highlight--secondary-color);
+}
+
+.select-game-form fieldset[disabled] {
+  opacity: 0.4;
+}
+
+.select-game-form,
+.game-board {
+  padding: 1rem;
+  background: var(--card-background-color);
+  border-radius: var(--border-radius);
+}
+.select-game__fieldset {
+  border: 1px solid var(--border-color);
+  padding: 1.5rem 0.5rem;
+  margin: 1.5rem 0;
+  border-radius: var(--border-radius);
+}
+
+.checkboxes--challenges {
+  display: grid;
+  grid-gap: 1rem;
+  grid-auto-rows: minmax(30px, auto);
+}
+.checkboxes--challenges input[type='checkbox'] {
+  margin-right: 0.5rem;
+  filter: invert(100%) hue-rotate(120deg) brightness(1.5);
+  padding: 1rem;
+  transform: scale(1.25);
+}
+
+.rules {
+  list-style: none;
+  display: inline-block;
+  padding: 0 0.3rem;
+  line-height: 1.85rem;
+}
+
+.game-form {
   margin: 2rem 1rem 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
   grid-gap: 1rem;
 }
 
-fieldset {
+.select-game__section__title {
+  font-size: 1.25rem;
+  color: var(--highlight--secondary-color);
+}
+.select-game__section__subtitle {
+  color: var(--highlight--secondary-color);
+  margin: 1.5rem 0 0.5rem;
+  opacity: 0.8;
+  font-style: italic;
+}
+fieldset.game-fieldset {
   display: contents;
 }
 
@@ -72,18 +173,18 @@ input {
 
 fieldset[disabled] input,
 input[disabled] {
-  color: rgb(255, 255, 255);
+  color: var(--contrast-color);
 }
 
 input[type='submit'] {
   grid-column: 3;
   grid-row: 3;
   padding: 1rem;
-  background-color: rgba(214, 0, 135, 0.81);
-  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2);
+  background-color: var(--highlight--primary-color);
+  box-shadow: 0 0 3px 3px var(--border-color);
   border: none;
   border-radius: var(--border-radius);
-  color: white;
+  color: var(--contrast-color);
 }
 
 .messageBox {
@@ -93,7 +194,7 @@ input[type='submit'] {
   border-radius: var(--border-radius);
   padding: 0.5rem;
   background: rgba(0, 0, 0, 0.863);
-  color: rgb(238, 13, 156);
+  color: var(--highlight--primary-color);
   font-weight: bold;
   line-height: 1.7rem;
   font-size: 1.5rem;
@@ -113,7 +214,9 @@ input[type='submit'] {
   grid-column: 1;
   grid-row: 3;
   font-size: 2.5rem;
+  color: var(--highlight--secondary-color);
 }
+
 .modeBox--count {
   grid-row: 3;
   grid-column: 2;
@@ -130,39 +233,56 @@ input[type='submit'] {
   margin-bottom: 1rem;
 }
 
-.playerBlocColor {
+.playerBlocColor,
+.findBlocColor {
   position: relative;
   width: 100%;
   height: 5rem;
-  border: 1px solid rgba(115, 125, 123, 0.386);
-  border-radius: var(--border-radius);
+  border: 0.15px solid var(--card-background-color);
 }
+
+.findBlocColor span,
 .playerBlocColor span {
   position: absolute;
   bottom: -1.5rem;
   right: 0;
-  color: rgba(204, 223, 221, 0.699);
 }
 
 .game__title {
-  color: rgba(90, 233, 214, 0.975);
+  color: var(--highlight--secondary-color);
 }
 
 .input__parent {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  background: #20202030;
   width: 100%;
   padding: 1rem 0.25rem;
 }
-label {
-  color: #ccdfdd;
-  margin: 0.5rem 0;
-}
+
 .input--color {
   max-width: 4rem;
   font-size: 1.4rem;
 }
+
 .message-input-to-display {
   margin-top: 0.8rem;
   min-height: 1.5rem;
+  color: var(--highlight--secondary-color);
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 640px) {
+  .radio-toolbar label {
+    margin: 0.25rem;
+    padding: 1.25rem;
+  }
+  input[type='submit'] {
+    padding: 1.25rem;
+  }
+}
+
+.colorBlocs {
+  display: flex;
 }

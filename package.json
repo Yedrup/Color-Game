@@ -2,13 +2,13 @@
   "name": "colorsgames",
   "version": "0.0.1",
   "author": "Purdey Chambraud <purdey.chambraud@gmail.com>",
-  "description": "The aim is to find out the color code of a random generated color in rgb, hsl or hexa. Different difficulty modes will be available.",
+  "description": "The aim is to find out the color code of a random generated color in rgb, hsl or hex. There are two modes: limited time or limited hits allowed With 3 levels of difficulty!.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel index.html --open",
     "clean": "rm -rf .cache rm -rf dist",
-    "build": "npm run clean && parcel build index.html  --public-url https://purdeychambraud.com/new-colors/"
+    "build": "npm run clean && parcel build index.html  --public-url https://purdeychambraud.com/color-game/"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/Yedrup/Color-Game#readme",
   "devDependencies": {},
+  "browserslist": [
+    "last 1 chrome versions"
+  ],
   "dependencies": {
     "parcel-bundler": "^1.12.4"
   }
